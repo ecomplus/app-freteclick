@@ -95,6 +95,7 @@ module.exports = async (order, storeId, appData, appSdk) => {
       "contact": fcCustomerId
     }
   }
+  console.log('frete click tag', JSON.stringify(data))
   logger.info(`Freteclick tag for #${storeId} ${order._id}`, { data })
 
   return client({
@@ -103,7 +104,10 @@ module.exports = async (order, storeId, appData, appSdk) => {
     token,
     data
   })
-    .then(res => res.data)
+    .then(res => {
+      console.log('result from creating order', JSON.stringify(res.data))
+      return res.data
+    })
     .catch(err => {
       debugAxiosError(err)
       throw err

@@ -95,8 +95,7 @@ module.exports = async (order, storeId, appData, appSdk) => {
       "contact": fcCustomerId
     }
   }
-  console.log('frete click tag', JSON.stringify(data))
-  logger.info(`Freteclick tag for #${storeId} ${order._id}`, { data })
+  logger.info(`Freteclick tag for #${storeId} ${order._id}`, JSON.stringify(data))
 
   return client({
     url: `/purchasing/orders/${fcOrderId}/choose-quote`,

@@ -461,7 +461,7 @@ const app = {
         title: 'Remover transportadoras',
         description: 'Insira a lista de IDs separados por vírgula de transportadoras que serão removidas do cálculo'
       },
-      hide: true
+      hide: false
     },
     warehouses: {
       schema: {

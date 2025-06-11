@@ -122,6 +122,12 @@ exports.post = async ({ appSdk }, req, res) => {
     }
   }
 
+  const isVidro = params.items.some(({ name }) => {
+    return name.includes('crista') || name.includes('espelh') || name.includes('vidr')
+  })
+  const productNames = params.items.map((item, index) => `Item[${index}].${item.name}`).join(' | ')
+  const restrict = isVidro ? `Vidro! ${productNames}` : productNames
+
   if (!params.to) {
     // just a free shipping preview with no shipping address received
     // respond only with free shipping option
@@ -136,10 +142,6 @@ exports.post = async ({ appSdk }, req, res) => {
     })
   }
 
-  const isVidro = params.items.some(({ name }) => {
-    return name.includes('crista') || name.includes('espelh') || name.includes('vidr')
-  })
-  const restrict = isVidro ? 'Vidro' : 'Móveis'
   if (params.items) {
     let finalWeight = 0
     let cartSubtotal = 0
@@ -194,6 +196,7 @@ exports.post = async ({ appSdk }, req, res) => {
         qtd: quantity
       })
     })
+    
     const productType = restrict
 
     const productTotalPrice = cartSubtotal || 1

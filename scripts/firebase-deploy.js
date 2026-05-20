@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+const { execSync } = require('child_process')
+
 const {
   FIREBASE_TOKEN,
   SERVER_OPERATOR_TOKEN,
@@ -22,13 +24,11 @@ if (SERVER_BASE_URI) {
 }
 
 client.functions.config.set(config, { project })
-  .then(() => client.deploy({
-    project,
-    token: FIREBASE_TOKEN,
-    force: true
-  }))
-
   .then(() => {
+    execSync(
+      `./node_modules/.bin/firebase deploy --project ${project} --force`,
+      { stdio: 'inherit' }
+    )
     console.log(
       '\x1b[32m%s\x1b[0m',
       `\nDeployed with success to Firebase project '${project}'`

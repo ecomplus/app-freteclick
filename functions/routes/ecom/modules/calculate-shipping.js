@@ -428,6 +428,4 @@ exports.post = async ({ appSdk }, req, res) => {
       message: 'Cannot calculate shipping without cart items'
     })
   }
-
-  res.send(response)
 }

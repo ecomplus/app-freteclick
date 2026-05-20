@@ -371,6 +371,15 @@ exports.post = async ({ appSdk }, req, res) => {
             lowestPriceShipping.discount = discount
           }
         }
+        if (appData.best_quotation && response.shipping_services.length > 1) {
+          let bestService = response.shipping_services[0]
+          for (const service of response.shipping_services) {
+            if (service.shipping_line.total_price < bestService.shipping_line.total_price) {
+              bestService = service
+            }
+          }
+          response.shipping_services = [bestService]
+        }
         res.send(response)
       } else {
         // console.log(data)

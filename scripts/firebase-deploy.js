@@ -23,6 +23,8 @@ if (SERVER_BASE_URI) {
   config.push(`server.base_uri=${SERVER_BASE_URI}`)
 }
 
+console.log(`Deploying to Firebase project: '${project}'`)
+
 client.functions.config.set(config, { project })
   .then(() => {
     execSync(

@@ -48,7 +48,6 @@ exports.post = async ({ appSdk }, req, res) => {
   }
 
   const marketplace = true
-  const noCache = !appData.best_quotation
 
   if (appData.free_shipping_from_value >= 0) {
     response.free_shipping_from_value = appData.free_shipping_from_value
@@ -200,7 +199,7 @@ exports.post = async ({ appSdk }, req, res) => {
     const productType = restrict
 
     const productTotalPrice = cartSubtotal || 1
-    const quoteType = 'full'
+    const quoteType = appData.best_quotation ? 'cheapest' : 'full'
 
     const body = {
       destination: destinationZip,
@@ -209,7 +208,7 @@ exports.post = async ({ appSdk }, req, res) => {
       productTotalPrice,
       quoteType,
       marketplace,
-      noCache,
+      noCache: true,
       packages,
       app: 'E-Com Plus'
     }

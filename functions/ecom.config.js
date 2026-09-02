@@ -457,7 +457,7 @@ const app = {
     disable_shipping: {
       schema: {
         type: 'string',
-        maxLength: 100,
+        maxLength: 600,
         title: 'Remover transportadoras',
         description: 'Insira a lista de IDs separados por vírgula de transportadoras que serão removidas do cálculo'
       },
